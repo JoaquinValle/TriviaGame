@@ -3,9 +3,9 @@ $(document).ready(function(){
     var questions = {
         question1: {
             count: 1,
-            question: "Test Question one",
+            question: "Work Test",
             answers: {
-                answerA: "A",
+                answerA: "Test",
                 answerB: "B",
                 answerC: "C",
                 answerD: "D"
@@ -16,10 +16,10 @@ $(document).ready(function(){
             count: 2,
             question: "Test Question Two",
             answers: {
-                answerA: "A",
-                answerB: "B",
-                answerC: "C",
-                answerD: "D"
+                answerA: "Option A",
+                answerB: "Option B",
+                answerC: "Option C",
+                answerD: "Option D"
             },
             correctAnswer: "3"
         },
@@ -80,20 +80,36 @@ $(document).ready(function(){
             timeLeft--
             timeText.text("Time Remaining: " + timeLeft)
             //console.log(timeLeft)
-            if (timeLeft === 0) {
-                clearInterval(intervalID)
-                questionText.text("Out of time!")
-            }
+ 
             answerClick(1)
             answerClick(2)
             answerClick(3)
             answerClick(4)
 
+            if (timeLeft === 0) {
+                clearInterval(intervalID)
+                questionText.text("Out of time!")
+                for(let i = 1; i < 5; i++) {
+                    $("#" + i).off("click")
+                }
+                questionCount++
+                setTimeout(clearElements, 4000)
+            }
+
             function clearElements() {
                 $("#options").text("")
+                for (i = 0; i < possibleAnswers.length; i++) {
+                    onQuestion(questionCount)
+                    var optionText = $("<div id='" + (i+1) + "'></div>")
+                    var option = possibleAnswers[i]
+                    optionText.text(option)
+                    $("#options").append(optionText)
+
+                }
             }
 
             function answerClick(clicked) {
+ 
                 $("#" + clicked).on("click", function() {
                     clearInterval(intervalID)
                     if ($(this).attr("id") === questions.question1.correctAnswer) {
@@ -101,68 +117,75 @@ $(document).ready(function(){
                         for(i = 1; i < 5; i++) {
                             $("#" + i).off("click")
                         }
-                        setTimeout(clearElements, 4000)
                         questionCount++
+                        setTimeout(clearElements, 4000)
+                        
+
                     }
-                    else {
+                    else if ($(this).attr("id") !== questions.question1.correctAnswer) {
                         questionText.text("Incorrect Answer")
                         for(i = 1; i < 5; i++) {
                             $("#" + i).off("click")
                         }
-                        setTimeout(clearElements, 4000)
                         questionCount++
+                        setTimeout(clearElements, 4000)
                     }
                 })
             }
         }
 
+        //Ads time div and appends initial time
         var timeText = $("<div id='time'></div> ")
         timeText.text("Time Remaining: " + timeLeft)
         $("#content").append(timeText)
 
+        //Ads answers array to possibleAnswers and appends question div
+        var possibleAnswers = []
         var questionText = $("<div>")
-        questionText.text(questions.question1.question)
+        onQuestion(questionCount)
         $("#content").append(questionText)
 
+        //Creates options div and appends to document. Then appends four options
         var options = $("<div id='options'></div>")
         $("#content").append(options)
-
-        var possibleAnswers = []
-
-        onQuestion(questionCount)
-
-        function onQuestion(qCount) {
-            if (qCount ===1) {
-            possibleAnswers = [questions.question1.answers.answerA,questions.question1.answers.answerB,
-                               questions.question1.answers.answerC,questions.question1.answers.answerD]
-            }
-            if (qCount ===2) {
-                possibleAnswers = [questions.question2.answers.answerA,questions.question2.answers.answerB,
-                                   questions.question2.answers.answerC,questions.question2.answers.answerD]
-                }
-            if (qCount ===3) {
-                possibleAnswers = [questions.question3.answers.answerA,questions.question3.answers.answerB,
-                                   questions.question3.answers.answerC,questions.question3.answers.answerD]
-                }
-            if (qCount ===4) {
-                possibleAnswers = [questions.question4.answers.answerA,questions.question4.answers.answerB,
-                                   questions.question4.answers.answerC,questions.question4.answers.answerD]
-                }
-            if (qCount ===5) {
-                possibleAnswers = [questions.question5.answers.answerA,questions.question5.answers.answerB,
-                                   questions.question5.answers.answerC,questions.question5.answers.answerD]
-                }
-            if (qCount ===6) {
-                possibleAnswers = [questions.question6.answers.answerA,questions.question6.answers.answerB,
-                                   questions.question6.answers.answerC,questions.question6.answers.answerD]
-                }
-        }    
-
         for (i = 0; i < possibleAnswers.length; i++) {
             var optionText = $("<div id='" + (i+1) + "'></div>")
             var option = possibleAnswers[i]
             optionText.text(option)
             $("#options").append(optionText)
         }
+
+        function onQuestion(qCount) {
+            if (qCount === 1) {
+                questionText.text(questions.question1.question)
+                possibleAnswers = [questions.question1.answers.answerA,questions.question1.answers.answerB,
+                                   questions.question1.answers.answerC,questions.question1.answers.answerD]
+                }
+            if (qCount === 2) {
+                questionText.text(questions.question2.question)
+                possibleAnswers = [questions.question2.answers.answerA,questions.question2.answers.answerB,
+                                   questions.question2.answers.answerC,questions.question2.answers.answerD]
+                    }
+            if (qCount === 3) {
+                questionText.text(questions.question3.question)
+                possibleAnswers = [questions.question3.answers.answerA,questions.question3.answers.answerB,
+                                   questions.question3.answers.answerC,questions.question3.answers.answerD]
+                    }
+            if (qCount === 4) {
+                questionText.text(questions.question4.question)
+                possibleAnswers = [questions.question4.answers.answerA,questions.question4.answers.answerB,
+                                   questions.question4.answers.answerC,questions.question4.answers.answerD]
+                    }
+            if (qCount === 5) {
+                questionText.text(questions.question5.question)
+                possibleAnswers = [questions.question5.answers.answerA,questions.question5.answers.answerB,
+                                   questions.question5.answers.answerC,questions.question5.answers.answerD]
+                    }
+            if (qCount === 6) {
+                questionText.text(questions.question6.question)
+                possibleAnswers = [questions.question6.answers.answerA,questions.question6.answers.answerB,
+                                   questions.question6.answers.answerC,questions.question6.answers.answerD]
+                    }
+        }    
     })
 })
