@@ -99,16 +99,16 @@ $(document).ready(function(){
         }
         console.log("Initial Count: " + questionCount)
 
-        //$("#1").on("click", answerClick(1))
-        //$("#2").on("click", answerClick(2))
-        //$("#3").on("click", answerClick(3))
-        //$("#4").on("click", answerClick(4))
 
+        optionClicked()  
+    })
+
+    function optionClicked(){
         $(".event").on("click", function(){
             console.log(this)
-            answerClick($(this).attr("id"))
+            answerCheck($(this).attr("id"))
         })
-    })
+    } 
 
     function count() {
         timeLeft--
@@ -126,97 +126,24 @@ $(document).ready(function(){
         }
     }
 
-    function answerClick(clicked) {
-            clearInterval(intervalID)
-             for (i = 1; i < 7; i++) {
-                if (questionCount === i) {
-                    if (clicked === totalAnswers[i-1]) {
-                        questionText.text("Correct Answer")
-                        offClick()
-                        setTimeout(clearElements, 4000)
-                        break
-                    }
-                    else if (clicked !== totalAnswers[i-1]) {
-                        questionText.text("Incorrect Answer")
-                        offClick()
-                        setTimeout(clearElements, 4000)
-                        break
-                    }
-                } 
+    function answerCheck(clicked) {
+        clearInterval(intervalID)
+            for (i = 1; i < 7; i++) {
+            if (questionCount === i) {
+                if (clicked === totalAnswers[i-1]) {
+                    questionText.text("Correct Answer")
+                    offClick()
+                    setTimeout(clearElements, 4000)
+                    break
+                }
+                else if (clicked !== totalAnswers[i-1]) {
+                    questionText.text("Incorrect Answer")
+                    offClick()
+                    setTimeout(clearElements, 4000)
+                    break
+                }
             } 
-            /*if (questionCount === 1) {
-                if ($(this).attr("id") === questions.question1.correctAnswer) {
-                    questionText.text("Correct Answer")
-                    offClick()
-                    setTimeout(clearElements, 4000)
-                }
-                else if ($(this).attr("id") !== questions.question1.correctAnswer) {
-                    questionText.text("Incorrect Answer")
-                    offClick()
-                    setTimeout(clearElements, 4000)
-                }
-            }
-            else if (questionCount === 2) {
-                if ($(this).attr("id") === questions.question2.correctAnswer) {
-                    questionText.text("Correct Answer")
-                    offClick()
-                    setTimeout(clearElements, 4000)
-                }
-                else if ($(this).attr("id") !== questions.question2.correctAnswer) {
-                    questionText.text("Incorrect Answer")
-                    offClick()
-                    setTimeout(clearElements, 4000)
-                }
-            }
-            else if (questionCount === 3) {
-                if ($(this).attr("id") === questions.question3.correctAnswer) {
-                    questionText.text("Correct Answer")
-                    offClick()
-                    setTimeout(clearElements, 4000)
-                }
-                else if ($(this).attr("id") !== questions.question3.correctAnswer) {
-                    questionText.text("Incorrect Answer")
-                    offClick()
-                    setTimeout(clearElements, 4000)
-                }
-            }
-            else if (questionCount === 4) {
-                if ($(this).attr("id") === questions.question4.correctAnswer) {
-                    questionText.text("Correct Answer")
-                    offClick()
-                    setTimeout(clearElements, 4000)
-                }
-                else if ($(this).attr("id") !== questions.question4.correctAnswer) {
-                    questionText.text("Incorrect Answer")
-                    offClick()
-                    setTimeout(clearElements, 4000)
-                }
-            }
-            else if (questionCount === 5) {
-                if ($(this).attr("id") === questions.question5.correctAnswer) {
-                    questionText.text("Correct Answer")
-                    offClick()
-                    setTimeout(clearElements, 4000)
-                }
-                else if ($(this).attr("id") !== questions.question5.correctAnswer) {
-                    questionText.text("Incorrect Answer")
-                    offClick()
-                   setTimeout(clearElements, 4000)
-                }
-            }
-            else if (questionCount === 6) {
-                if ($(this).attr("id") === questions.question6.correctAnswer) {
-                    questionText.text("Correct Answer")
-                    offClick()
-                    setTimeout(clearElements, 4000)
-                }
-                else if ($(this).attr("id") !== questions.question6.correctAnswer) {
-                    questionText.text("Incorrect Answer")
-                    offClick()
-                    setTimeout(clearElements, 4000)
-                }
-            }*/
-        //setTimeout(clearElements, 4000)
+        } 
     }
     
     function offClick() {
@@ -229,12 +156,13 @@ $(document).ready(function(){
         $("#options").text("")
         questionCount++
         console.log("Count: " + questionCount)
+        onQuestion(questionCount)
+        timeLeft = 10
+        timeText.text("Time Remaining: " + timeLeft)
+        clearInterval(intervalID)
+        intervalID = setInterval(count, 1000)
+
         for (i = 0; i < possibleAnswers.length; i++) {
-            onQuestion(questionCount)
-            timeLeft = 10
-            timeText.text("Time Remaining: " + timeLeft)
-            clearInterval(intervalID)
-            intervalID = setInterval(count, 1000)
             var optionText = $("<div id='" + (i+1) + "'></div>")
             var option = possibleAnswers[i]
             optionText.text(option)
