@@ -97,15 +97,13 @@ $(document).ready(function(){
             optionText.text(option)
             $("#options").append(optionText)
         }
-        console.log("Initial Count: " + questionCount)
-
-
+        console.log("Initial Question Count: " + questionCount)
         optionClicked()  
     })
 
     function optionClicked(){
         $(".event").on("click", function(){
-            console.log(this)
+            console.log("Your answer is: " + $(this).attr("id"))
             answerCheck($(this).attr("id"))
         })
     } 
@@ -122,7 +120,6 @@ $(document).ready(function(){
             questionText.text("Out of time!")
             offClick()
             setTimeout(clearElements, 4000)
-            console.log("Count: " + questionCount)
         }
     }
 
@@ -155,7 +152,7 @@ $(document).ready(function(){
     function clearElements() {
         $("#options").text("")
         questionCount++
-        console.log("Count: " + questionCount)
+        console.log("Question Count: " + questionCount)
         onQuestion(questionCount)
         timeLeft = 10
         timeText.text("Time Remaining: " + timeLeft)
@@ -163,11 +160,12 @@ $(document).ready(function(){
         intervalID = setInterval(count, 1000)
 
         for (i = 0; i < possibleAnswers.length; i++) {
-            var optionText = $("<div id='" + (i+1) + "'></div>")
+            var optionText = $("<div class='event' id='" + (i+1) + "'></div>")
             var option = possibleAnswers[i]
             optionText.text(option)
             $("#options").append(optionText)
         }
+       optionClicked()
     }
 
     function onQuestion(qCount) {
