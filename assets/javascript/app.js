@@ -1,6 +1,7 @@
 $(document).ready(function(){
 
     var questions = {
+        totalQuestions: 6,
         question1: {
             question: "Test Question One",
             answers: {
@@ -71,7 +72,14 @@ $(document).ready(function(){
     var timeText = $("<div id='time'></div> ")
     var questionText = $("<div>")
     var options = $("<div id='options'></div>")
-    var totalAnswers = ["2", "3", "2", "1", "3", "4"]
+
+/*var totalAnswers = []
+    for (i=0; i < questions.totalQuestions; i++) {
+        totalAnswers.push(questions.question)
+    } */
+    
+    totalAnswers = [questions.question1.correctAnswer, questions.question2.correctAnswer, questions.question3.correctAnswer, 
+                    questions.question4.correctAnswer, questions.question5.correctAnswer, questions.question6.correctAnswer]
 
     $(".timeframe").on("click", function() {
         $(".timeframe").removeAttr("disabled")
