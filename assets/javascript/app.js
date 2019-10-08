@@ -65,7 +65,8 @@ $(document).ready(function(){
         },
     }
     
-    var timeLeft = 10
+    var timeChoose
+    var timeLeft
     var intervalID
     var questionCount = 1
     var possibleAnswers = []
@@ -85,10 +86,9 @@ $(document).ready(function(){
         $(".timeframe").removeAttr("disabled")
         $(this).attr("disabled", true)
         $("#start").removeAttr("disabled")
-
+        timeChoose = $(this).attr("value")
+        timeLeft = timeChoose
     })
-
-
 
     $("#start").on("click", function() {
 
@@ -165,7 +165,7 @@ $(document).ready(function(){
         questionCount++
         console.log("Question Count: " + questionCount)
         onQuestion(questionCount)
-        timeLeft = 10
+        timeLeft = timeChoose
         timeText.text("Time Remaining: " + timeLeft)
         clearInterval(intervalID)
         intervalID = setInterval(count, 1000)
