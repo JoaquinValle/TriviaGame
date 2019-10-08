@@ -96,16 +96,16 @@ $(document).ready(function(){
             $("#options").append(optionText)
         }
 
-        answerClick(1)
-        answerClick(2)
-        answerClick(3)
-        answerClick(4)
-        console.log(questionCount)
+        console.log("Initial Count: " + questionCount)
 
         function count() {
             timeLeft--
             timeText.text("Time Remaining: " + timeLeft)
             noTime()
+            answerClick(1)
+            answerClick(2)
+            answerClick(3)
+            answerClick(4)
         }
 
         function noTime() {
@@ -117,134 +117,137 @@ $(document).ready(function(){
                 }
                 questionCount++
                 setTimeout(clearElements, 4000)
-                console.log(questionCount)
+                console.log("Count" + questionCount)
             }
         }
 
         function answerClick(clicked) {
             $("#" + clicked).on("click", function() {
                 clearInterval(intervalID)
+
+
+              /*   for (i = 1; i < 7; i++) {
+                    if (questionCount === i) {
+                        if ($(this).attr("id") === questions.question1.correctAnswer) {
+                            questionText.text("Correct Answer")
+                            offClick()
+                            questionCount++
+                            console.log("Count:" + questionCount)
+                            setTimeout(clearElements, 4000)
+                        }
+                        else if ($(this).attr("id") !== questions.question1.correctAnswer) {
+                            questionText.text("Incorrect Answer")
+                            offClick()
+                            questionCount++
+                            console.log("Count:" + questionCount)
+                            setTimeout(clearElements, 4000)
+                        }
+                    } 
+                } */
                 if (questionCount === 1) {
                     if ($(this).attr("id") === questions.question1.correctAnswer) {
-                        console.log(this)
                         questionText.text("Correct Answer")
-                        for(i = 1; i < 5; i++) {
-                            $("#" + i).off("click")
-                        }
+                        offClick()
                         questionCount++
-                        console.log(questionCount)
+                        console.log("Count:" + questionCount)
                         setTimeout(clearElements, 4000)
                     }
                     else if ($(this).attr("id") !== questions.question1.correctAnswer) {
                         questionText.text("Incorrect Answer")
-                        for(i = 1; i < 5; i++) {
-                            $("#" + i).off("click")
-                        }
+                        offClick()
                         questionCount++
+                        console.log("Count:" + questionCount)
                         setTimeout(clearElements, 4000)
                     }
                 }
-                if (questionCount === 2) {
+                else if (questionCount === 2) {
                     if ($(this).attr("id") === questions.question2.correctAnswer) {
-                        console.log(this)
-                        console.log(questionCount)
                         questionText.text("Correct Answer")
-                        for(i = 1; i < 5; i++) {
-                            $("#" + i).off("click")
-                        }
+                        offClick()
                         questionCount++
+                        console.log("Count:" + questionCount)
                         setTimeout(clearElements, 4000)
                     }
                     else if ($(this).attr("id") !== questions.question2.correctAnswer) {
                         questionText.text("Incorrect Answer")
-                        for(i = 1; i < 5; i++) {
-                            $("#" + i).off("click")
-                        }
+                        offClick()
                         questionCount++
+                        console.log("Count:" + questionCount)
                         setTimeout(clearElements, 4000)
                     }
                 }
-                if (questionCount === 3) {
+                else if (questionCount === 3) {
                     if ($(this).attr("id") === questions.question3.correctAnswer) {
-                        console.log(this)
-                        console.log(questionCount)
                         questionText.text("Correct Answer")
-                        for(i = 1; i < 5; i++) {
-                            $("#" + i).off("click")
-                        }
+                        offClick()
                         questionCount++
+                        console.log("Count:" + questionCount)
                         setTimeout(clearElements, 4000)
                     }
                     else if ($(this).attr("id") !== questions.question3.correctAnswer) {
                         questionText.text("Incorrect Answer")
-                        for(i = 1; i < 5; i++) {
-                            $("#" + i).off("click")
-                        }
+                        offClick()
                         questionCount++
+                        console.log("Count:" + questionCount)
                         setTimeout(clearElements, 4000)
                     }
                 }
-                if (questionCount === 4) {
+                else if (questionCount === 4) {
                     if ($(this).attr("id") === questions.question4.correctAnswer) {
-                        console.log(this)
-                        console.log(questionCount)
                         questionText.text("Correct Answer")
-                        for(i = 1; i < 5; i++) {
-                            $("#" + i).off("click")
-                        }
+                        offClick()
                         questionCount++
+                        console.log("Count:" + questionCount)
                         setTimeout(clearElements, 4000)
                     }
                     else if ($(this).attr("id") !== questions.question4.correctAnswer) {
                         questionText.text("Incorrect Answer")
-                        for(i = 1; i < 5; i++) {
-                            $("#" + i).off("click")
-                        }
+                        offClick()
                         questionCount++
+                        console.log("Count:" + questionCount)
                         setTimeout(clearElements, 4000)
                     }
                 }
-                if (questionCount === 5) {
+                else if (questionCount === 5) {
                     if ($(this).attr("id") === questions.question5.correctAnswer) {
-                        console.log(this)
-                        console.log(questionCount)
                         questionText.text("Correct Answer")
-                        for(i = 1; i < 5; i++) {
-                            $("#" + i).off("click")
-                        }
+                        offClick()
                         questionCount++
+                        console.log("Count:" + questionCount)
                         setTimeout(clearElements, 4000)
                     }
                     else if ($(this).attr("id") !== questions.question5.correctAnswer) {
                         questionText.text("Incorrect Answer")
-                        for(i = 1; i < 5; i++) {
-                            $("#" + i).off("click")
-                        }
+                        offClick()
                         questionCount++
-                        setTimeout(clearElements, 4000)
+                        console.log("Count:" + questionCount)
+                       setTimeout(clearElements, 4000)
                     }
                 }
-                if (questionCount === 6) {
+                else if (questionCount === 6) {
                     if ($(this).attr("id") === questions.question6.correctAnswer) {
-                        console.log(this)
-                        console.log(questionCount)
                         questionText.text("Correct Answer")
-                        for(i = 1; i < 5; i++) {
-                            $("#" + i).off("click")
-                        }
+                        offClick()
                         questionCount++
+                        console.log("Count:" + questionCount)
                         setTimeout(clearElements, 4000)
                     }
                     else if ($(this).attr("id") !== questions.question6.correctAnswer) {
                         questionText.text("Incorrect Answer")
-                        for(i = 1; i < 5; i++) {
-                            $("#" + i).off("click")
-                        }
+                        offClick()
                         questionCount++
+                        console.log("Count:" + questionCount)
                         setTimeout(clearElements, 4000)
                     }
                 }
             })
+            //setTimeout(clearElements, 4000)
+        }
+        
+        function offClick() {
+            for(i = 1; i < 5; i++) {
+                $("#" + i).off("click")
+            }
         }
 
         function clearElements() {
