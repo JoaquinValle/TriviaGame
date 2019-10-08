@@ -2,7 +2,6 @@ $(document).ready(function(){
 
     var questions = {
         question1: {
-            count: 1,
             question: "Test Question One",
             answers: {
                 answerA: "Test A",
@@ -13,7 +12,6 @@ $(document).ready(function(){
             correctAnswer: "2"
         },
         question2: {
-            count: 2,
             question: "Test Question Two",
             answers: {
                 answerA: "Option A",
@@ -24,7 +22,6 @@ $(document).ready(function(){
             correctAnswer: "3"
         },
         question3: {
-            count: 3,
             question: "Test Question Three",
             answers: {
                 answerA: "Test A",
@@ -35,7 +32,6 @@ $(document).ready(function(){
             correctAnswer: "2"
         },
         question4: {
-            count: 4,
             question: "Test Question Four",
             answers: {
                 answerA: "Option A",
@@ -46,7 +42,6 @@ $(document).ready(function(){
             correctAnswer: "1"
         },
         question5: {
-            count: 5,
             question: "Test Question Five",
             answers: {
                 answerA: "Test A",
@@ -57,14 +52,14 @@ $(document).ready(function(){
             correctAnswer: "3"
         },
         question6: {
-            count: 6,
             question: "Test Question Six",
-            answers: {
+            answers: [
+                {
                 answerA: "Option A",
                 answerB: "Option B",
                 answerC: "Option C",
                 answerD: "Option D"
-            },
+            }],
             correctAnswer: "4"
         },
     }
@@ -77,6 +72,14 @@ $(document).ready(function(){
     var questionText = $("<div>")
     var options = $("<div id='options'></div>")
     var totalAnswers = ["2", "3", "2", "1", "3", "4"]
+
+    $(".timeframe").on("click", function() {
+        $(".timeframe").removeAttr("disabled")
+        $(this).attr("disabled", true)
+        $("#start").removeAttr("disabled")
+
+    })
+
 
 
     $("#start").on("click", function() {
