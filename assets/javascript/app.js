@@ -73,6 +73,7 @@ $(document).ready(function(){
     var timeText = $("<div id='time'></div> ")
     var questionText = $("<div>")
     var options = $("<div id='options'></div>")
+    var correctCount = 0
 
 /*var totalAnswers = []
     for (i=0; i < questions.totalQuestions; i++) {
@@ -139,9 +140,11 @@ $(document).ready(function(){
             for (i = 1; i < 7; i++) {
             if (questionCount === i) {
                 if (clicked === totalAnswers[i-1]) {
+                    correctCount++
                     questionText.text("Correct Answer")
                     offClick()
                     setTimeout(clearElements, 4000)
+                    
                     break
                 }
                 else if (clicked !== totalAnswers[i-1]) {
@@ -164,7 +167,6 @@ $(document).ready(function(){
         $("#options").text("")
         questionCount++
         console.log("Question Count: " + questionCount)
-        onQuestion(questionCount)
         timeLeft = timeChoose
         timeText.text("Time Remaining: " + timeLeft)
         clearInterval(intervalID)
@@ -176,7 +178,18 @@ $(document).ready(function(){
             optionText.text(option)
             $("#options").append(optionText)
         }
-       optionClicked()
+        onQuestion(questionCount)
+        optionClicked()
+        results(questionCount)
+    }
+
+    function results(tCount) {
+        if (tCount > questions.totalQuestions) {
+            $("#content").text("")
+            var result = $("<div>")
+            result.text("You got " + correctCount + " questions correct out of 10 questions")
+            $("#content").append(result)
+        }
     }
 
     function onQuestion(qCount) {
