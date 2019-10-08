@@ -3,12 +3,12 @@ $(document).ready(function(){
     var questions = {
         question1: {
             count: 1,
-            question: "Work Test",
+            question: "Test Question One",
             answers: {
-                answerA: "Test",
-                answerB: "B",
-                answerC: "C",
-                answerD: "D"
+                answerA: "Test A",
+                answerB: "Test B",
+                answerC: "Test C",
+                answerD: "Test D"
             },
             correctAnswer: "2"
         },
@@ -27,10 +27,10 @@ $(document).ready(function(){
             count: 3,
             question: "Test Question Three",
             answers: {
-                answerA: "A",
-                answerB: "B",
-                answerC: "C",
-                answerD: "D"
+                answerA: "Test A",
+                answerB: "Test B",
+                answerC: "Test C",
+                answerD: "Test D"
             },
             correctAnswer: "2"
         },
@@ -38,10 +38,10 @@ $(document).ready(function(){
             count: 4,
             question: "Test Question Four",
             answers: {
-                answerA: "A",
-                answerB: "B",
-                answerC: "C",
-                answerD: "D"
+                answerA: "Option A",
+                answerB: "Option B",
+                answerC: "Option C",
+                answerD: "Option D"
             },
             correctAnswer: "1"
         },
@@ -49,10 +49,10 @@ $(document).ready(function(){
             count: 5,
             question: "Test Question Five",
             answers: {
-                answerA: "A",
-                answerB: "B",
-                answerC: "C",
-                answerD: "D"
+                answerA: "Test A",
+                answerB: "Test B",
+                answerC: "Test C",
+                answerD: "Test D"
             },
             correctAnswer: "3"
         },
@@ -60,10 +60,10 @@ $(document).ready(function(){
             count: 6,
             question: "Test Question Six",
             answers: {
-                answerA: "A",
-                answerB: "B",
-                answerC: "C",
-                answerD: "D"
+                answerA: "Option A",
+                answerB: "Option B",
+                answerC: "Option C",
+                answerD: "Option D"
             },
             correctAnswer: "4"
         },
@@ -71,21 +71,44 @@ $(document).ready(function(){
     var timeLeft = 10
     var intervalID
     var questionCount = 1
+    var possibleAnswers = []
+    var timeText = $("<div id='time'></div> ")
+    var questionText = $("<div>")
+    var options = $("<div id='options'></div>")
+
 
     $("#start").on("click", function() {
+
         $("#content").text("")
         intervalID = setInterval(count, 1000)
+   
+        timeText.text("Time Remaining: " + timeLeft)
+        $("#content").append(timeText)
+
+        onQuestion(questionCount)
+        $("#content").append(questionText)
+
+        $("#content").append(options)
+        for (i = 0; i < possibleAnswers.length; i++) {
+            var optionText = $("<div id='" + (i+1) + "'></div>")
+            var option = possibleAnswers[i]
+            optionText.text(option)
+            $("#options").append(optionText)
+        }
+
+        answerClick(1)
+        answerClick(2)
+        answerClick(3)
+        answerClick(4)
+        console.log(questionCount)
 
         function count() {
             timeLeft--
             timeText.text("Time Remaining: " + timeLeft)
-            //console.log(timeLeft)
- 
-            answerClick(1)
-            answerClick(2)
-            answerClick(3)
-            answerClick(4)
+            noTime()
+        }
 
+        function noTime() {
             if (timeLeft === 0) {
                 clearInterval(intervalID)
                 questionText.text("Out of time!")
@@ -94,33 +117,23 @@ $(document).ready(function(){
                 }
                 questionCount++
                 setTimeout(clearElements, 4000)
+                console.log(questionCount)
             }
+        }
 
-            function clearElements() {
-                $("#options").text("")
-                for (i = 0; i < possibleAnswers.length; i++) {
-                    onQuestion(questionCount)
-                    var optionText = $("<div id='" + (i+1) + "'></div>")
-                    var option = possibleAnswers[i]
-                    optionText.text(option)
-                    $("#options").append(optionText)
-
-                }
-            }
-
-            function answerClick(clicked) {
- 
-                $("#" + clicked).on("click", function() {
-                    clearInterval(intervalID)
+        function answerClick(clicked) {
+            $("#" + clicked).on("click", function() {
+                clearInterval(intervalID)
+                if (questionCount === 1) {
                     if ($(this).attr("id") === questions.question1.correctAnswer) {
+                        console.log(this)
                         questionText.text("Correct Answer")
                         for(i = 1; i < 5; i++) {
                             $("#" + i).off("click")
                         }
                         questionCount++
+                        console.log(questionCount)
                         setTimeout(clearElements, 4000)
-                        
-
                     }
                     else if ($(this).attr("id") !== questions.question1.correctAnswer) {
                         questionText.text("Incorrect Answer")
@@ -130,29 +143,127 @@ $(document).ready(function(){
                         questionCount++
                         setTimeout(clearElements, 4000)
                     }
-                })
-            }
+                }
+                if (questionCount === 2) {
+                    if ($(this).attr("id") === questions.question2.correctAnswer) {
+                        console.log(this)
+                        console.log(questionCount)
+                        questionText.text("Correct Answer")
+                        for(i = 1; i < 5; i++) {
+                            $("#" + i).off("click")
+                        }
+                        questionCount++
+                        setTimeout(clearElements, 4000)
+                    }
+                    else if ($(this).attr("id") !== questions.question2.correctAnswer) {
+                        questionText.text("Incorrect Answer")
+                        for(i = 1; i < 5; i++) {
+                            $("#" + i).off("click")
+                        }
+                        questionCount++
+                        setTimeout(clearElements, 4000)
+                    }
+                }
+                if (questionCount === 3) {
+                    if ($(this).attr("id") === questions.question3.correctAnswer) {
+                        console.log(this)
+                        console.log(questionCount)
+                        questionText.text("Correct Answer")
+                        for(i = 1; i < 5; i++) {
+                            $("#" + i).off("click")
+                        }
+                        questionCount++
+                        setTimeout(clearElements, 4000)
+                    }
+                    else if ($(this).attr("id") !== questions.question3.correctAnswer) {
+                        questionText.text("Incorrect Answer")
+                        for(i = 1; i < 5; i++) {
+                            $("#" + i).off("click")
+                        }
+                        questionCount++
+                        setTimeout(clearElements, 4000)
+                    }
+                }
+                if (questionCount === 4) {
+                    if ($(this).attr("id") === questions.question4.correctAnswer) {
+                        console.log(this)
+                        console.log(questionCount)
+                        questionText.text("Correct Answer")
+                        for(i = 1; i < 5; i++) {
+                            $("#" + i).off("click")
+                        }
+                        questionCount++
+                        setTimeout(clearElements, 4000)
+                    }
+                    else if ($(this).attr("id") !== questions.question4.correctAnswer) {
+                        questionText.text("Incorrect Answer")
+                        for(i = 1; i < 5; i++) {
+                            $("#" + i).off("click")
+                        }
+                        questionCount++
+                        setTimeout(clearElements, 4000)
+                    }
+                }
+                if (questionCount === 5) {
+                    if ($(this).attr("id") === questions.question5.correctAnswer) {
+                        console.log(this)
+                        console.log(questionCount)
+                        questionText.text("Correct Answer")
+                        for(i = 1; i < 5; i++) {
+                            $("#" + i).off("click")
+                        }
+                        questionCount++
+                        setTimeout(clearElements, 4000)
+                    }
+                    else if ($(this).attr("id") !== questions.question5.correctAnswer) {
+                        questionText.text("Incorrect Answer")
+                        for(i = 1; i < 5; i++) {
+                            $("#" + i).off("click")
+                        }
+                        questionCount++
+                        setTimeout(clearElements, 4000)
+                    }
+                }
+                if (questionCount === 6) {
+                    if ($(this).attr("id") === questions.question6.correctAnswer) {
+                        console.log(this)
+                        console.log(questionCount)
+                        questionText.text("Correct Answer")
+                        for(i = 1; i < 5; i++) {
+                            $("#" + i).off("click")
+                        }
+                        questionCount++
+                        setTimeout(clearElements, 4000)
+                    }
+                    else if ($(this).attr("id") !== questions.question6.correctAnswer) {
+                        questionText.text("Incorrect Answer")
+                        for(i = 1; i < 5; i++) {
+                            $("#" + i).off("click")
+                        }
+                        questionCount++
+                        setTimeout(clearElements, 4000)
+                    }
+                }
+            })
         }
 
-        //Ads time div and appends initial time
-        var timeText = $("<div id='time'></div> ")
-        timeText.text("Time Remaining: " + timeLeft)
-        $("#content").append(timeText)
-
-        //Ads answers array to possibleAnswers and appends question div
-        var possibleAnswers = []
-        var questionText = $("<div>")
-        onQuestion(questionCount)
-        $("#content").append(questionText)
-
-        //Creates options div and appends to document. Then appends four options
-        var options = $("<div id='options'></div>")
-        $("#content").append(options)
-        for (i = 0; i < possibleAnswers.length; i++) {
-            var optionText = $("<div id='" + (i+1) + "'></div>")
-            var option = possibleAnswers[i]
-            optionText.text(option)
-            $("#options").append(optionText)
+        function clearElements() {
+            $("#options").text("")
+            for (i = 0; i < possibleAnswers.length; i++) {
+                onQuestion(questionCount)
+                timeLeft = 10
+                timeText.text("Time Remaining: " + timeLeft)
+                clearInterval(intervalID)
+                intervalID = setInterval(count, 1000)
+                var optionText = $("<div id='" + (i+1) + "'></div>")
+                var option = possibleAnswers[i]
+                optionText.text(option)
+                $("#options").append(optionText)
+                answerClick(1)
+                answerClick(2)
+                answerClick(3)
+                answerClick(4)
+            }
         }
 
         function onQuestion(qCount) {
