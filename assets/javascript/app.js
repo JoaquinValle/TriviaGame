@@ -76,7 +76,7 @@ $(document).ready(function(){
     var timeText = $("<div id='time'></div> ")
     var questionText = $("<div>")
     var options = $("<div id='options'></div>")
-    var ansClick
+    var totalAnswers = ["2", "3", "2", "1", "3", "4"]
 
 
     $("#start").on("click", function() {
@@ -92,17 +92,22 @@ $(document).ready(function(){
 
         $("#content").append(options)
         for (i = 0; i < possibleAnswers.length; i++) {
-            var optionText = $("<div id='" + (i+1) + "'></div>")
+            var optionText = $("<div class='event' id='" + (i+1) + "'></div>")
             var option = possibleAnswers[i]
             optionText.text(option)
             $("#options").append(optionText)
         }
         console.log("Initial Count: " + questionCount)
 
-        $("#1").on("click", answerClick(1))
-        $("#2").on("click", answerClick(2))
-        $("#3").on("click", answerClick(3))
-        $("#4").on("click", answerClick(4))
+        //$("#1").on("click", answerClick(1))
+        //$("#2").on("click", answerClick(2))
+        //$("#3").on("click", answerClick(3))
+        //$("#4").on("click", answerClick(4))
+
+        $(".event").on("click", function(){
+            console.log(this)
+            answerClick($(this).attr("id"))
+        })
     })
 
     function count() {
@@ -122,30 +127,24 @@ $(document).ready(function(){
     }
 
     function answerClick(clicked) {
-        $("#" + clicked).on("click", function() {
             clearInterval(intervalID)
-    
-            /*
              for (i = 1; i < 7; i++) {
                 if (questionCount === i) {
-                    if ($(this).attr("id") === answerArr+i[2]) {
+                    if (clicked === totalAnswers[i-1]) {
                         questionText.text("Correct Answer")
                         offClick()
-                        questionCount++
-                        console.log("Count:" + questionCount)
                         setTimeout(clearElements, 4000)
+                        break
                     }
-                    else if ($(this).attr("id") !== answerArr1) {
+                    else if (clicked !== totalAnswers[i-1]) {
                         questionText.text("Incorrect Answer")
                         offClick()
-                        questionCount++
-                        console.log("Count:" + questionCount)
                         setTimeout(clearElements, 4000)
+                        break
                     }
-                    break
                 } 
-            } */
-            if (questionCount === 1) {
+            } 
+            /*if (questionCount === 1) {
                 if ($(this).attr("id") === questions.question1.correctAnswer) {
                     questionText.text("Correct Answer")
                     offClick()
@@ -216,8 +215,7 @@ $(document).ready(function(){
                     offClick()
                     setTimeout(clearElements, 4000)
                 }
-            }
-        })
+            }*/
         //setTimeout(clearElements, 4000)
     }
     
@@ -230,7 +228,7 @@ $(document).ready(function(){
     function clearElements() {
         $("#options").text("")
         questionCount++
-        console.log(questionCount)
+        console.log("Count: " + questionCount)
         for (i = 0; i < possibleAnswers.length; i++) {
             onQuestion(questionCount)
             timeLeft = 10
@@ -241,10 +239,6 @@ $(document).ready(function(){
             var option = possibleAnswers[i]
             optionText.text(option)
             $("#options").append(optionText)
-            $("#1").on("click", answerClick(1))
-            $("#2").on("click", answerClick(2))
-            $("#3").on("click", answerClick(3))
-            $("#4").on("click", answerClick(4))
         }
     }
 
