@@ -9,9 +9,9 @@ body {
 
   h1 {
       color: whitesmoke;
-      font-size: 80px
+      font-size: 80px;
+      text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000
   }
-
 
 #content {
     color: black;
@@ -26,24 +26,38 @@ button {
     font-size: 30px
 }
 
+.timeframe:disabled {
+    border-width: 3px
+}
+
 button:hover {
     background-color: rgba(139, 0, 0, 1);
 }
 
 button:disabled {
-    background-color: indianred
+    background-color: rgba(220, 20, 60, .7)
 }
 
 button:disabled:hover {
-    background-color: indianred;
+    background-color: rgba(220, 20, 60, .6)
     color: whitesmoke
+}
+
+#start:disabled {
+    background-color: rgba(220, 20, 60, .7)
 }
 
 #question, #response, #endMessage {
     font-size: 30px;
     margin-top: 20px;
     margin-bottom: 20px;
-    color: whitesmoke
+    color: whitesmoke;
+    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000
+
+}
+
+#question {
+    font-size: 22px
 }
 
 #time {
@@ -54,7 +68,7 @@ button:disabled:hover {
 }
 
 .event:hover {
-    background-color: rgba(139, 0, 0, .3)
+    background-color: rgba(139, 0, 0, .4);
 }
 
 .event, #correct, #incorrect, #outOfTime {
@@ -70,7 +84,10 @@ button:disabled:hover {
 #questionCounter {
     color: whitesmoke;
     font-weight: 600;
-    font-size: 20px
+    font-size: 20px;
+    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000
 }
 
-
+.timeframe {
+    margin-right: 20px
+}

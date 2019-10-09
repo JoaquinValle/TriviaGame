@@ -1,67 +1,111 @@
 $(document).ready(function(){
 
     var questions = {
-        totalQuestions: 6,
+        totalQuestions: 10,
         question1: {
-            question: "Test Question One",
+            question: "Pinotage is a hybrid vine from which two grapes?",
             answers: {
-                answerA: "Test A",
-                answerB: "Test B",
-                answerC: "Test C",
-                answerD: "Test D"
+                answerA: "A. Grenache and Pinot Meunier.",
+                answerB: "B. Pinot Noir and Cinsault.",
+                answerC: "C. Cabernet Sauvignon and Grenache.",
+                answerD: "D. Syrah and Peloursin."
             },
             correctAnswer: "2"
         },
         question2: {
-            question: "Test Question Two",
+            question: "Which region in Champagne is the most important for growing Chardonnay?",
             answers: {
-                answerA: "Option A",
-                answerB: "Option B",
-                answerC: "Option C",
-                answerD: "Option D"
+                answerA: "A. Aube.",
+                answerB: "B. Côte de Sezanne.",
+                answerC: "C. Côte de Blancs.",
+                answerD: "D. Montagne de Reims."
             },
             correctAnswer: "3"
         },
         question3: {
-            question: "Test Question Three",
+            question: "Where is the wine region of Lodi located?",
             answers: {
-                answerA: "Test A",
-                answerB: "Test B",
-                answerC: "Test C",
-                answerD: "Test D"
+                answerA: "A. Provence, France.",
+                answerB: "B. California, USA.",
+                answerC: "C. Western Australia.",
+                answerD: "D. Puglia, Italy."
             },
             correctAnswer: "2"
         },
         question4: {
-            question: "Test Question Four",
+            question: "When talking of Sauterns, what type of wine would you find?",
             answers: {
-                answerA: "Option A",
-                answerB: "Option B",
-                answerC: "Option C",
-                answerD: "Option D"
+                answerA: "A. Very sweet wine affected by Botrytis Cinerea.",
+                answerB: "B. Fortified red dessert wine.",
+                answerC: "C. High tannin, mid acidity red blend.",
+                answerD: "D. Unripe, high acid white wine."
             },
             correctAnswer: "1"
         },
         question5: {
-            question: "Test Question Five",
+            question: "Which acid is abundant in red wine grapes?",
             answers: {
-                answerA: "Test A",
-                answerB: "Test B",
-                answerC: "Test C",
-                answerD: "Test D"
+                answerA: "A. Acetic acid.",
+                answerB: "B. Ascorbic acid.",
+                answerC: "C. Tartaric acid.",
+                answerD: "D. Butyric acid."
             },
             correctAnswer: "3"
         },
         question6: {
-            question: "Test Question Six",
-            answers: [
+            question: "What is an accurate description for 2,4,6-Trichloroanisole?",
+            answers: 
                 {
-                answerA: "Option A",
-                answerB: "Option B",
-                answerC: "Option C",
-                answerD: "Option D"
-            }],
+                answerA: "A. Damage caused by exposure to excessive radiation, usually UV.",
+                answerB: "B. Wine with exposure to too much heat during storage.",
+                answerC: "C. Contamination caused by too much oxygen exposure.",
+                answerD: "D. A chemical contaminant due to a problem with the cork."
+            },
             correctAnswer: "4"
+        },
+        question7: {
+            question: "How many litters are in a Bordeaux barrel?",
+            answers: 
+                {
+                answerA: "A. 100.",
+                answerB: "B. 185.",
+                answerC: "C. 205.",
+                answerD: "D. 225."
+            },
+            correctAnswer: "4"
+        },
+        question8: {
+            question: "Sekt is a sparklin wine from which country?",
+            answers: 
+                {
+                answerA: "A. Italy.",
+                answerB: "B. Germany.",
+                answerC: "C. Spain.",
+                answerD: "D. France."
+            },
+            correctAnswer: "2"
+        },
+        question9: {
+            question: "What part of the grapes contain tannins?",
+            answers: 
+                {
+                answerA: "A. Skins, seeds, and stems.",
+                answerB: "B. Pulp and skin.",
+                answerC: "C. Only skins.",
+                answerD: "D. Tannins are not in the grapes and are a result of vinification."
+            },
+            correctAnswer: "1"
+        },
+        question10: {
+            question: "Why are ladybuggs a problem in wine production?",
+            answers: 
+                {
+                answerA: "A. They produce a bad flavor if they get pressed with the grapes.",
+                answerB: "B. They attack the vine and kill eat",
+                answerC: "C. They attract other pests that affect the vines.",
+                answerD: "D. They eat the grapes and the vines produce a lower quality grape."
+            },
+            correctAnswer: "1"
         },
     }
     
@@ -80,13 +124,14 @@ $(document).ready(function(){
     var questionCounter = $("<div id='questionCounter'></div>")
     var ABCD = ["A", "B", "C", "D"]
 
-/*var totalAnswers = []
+    var totalAnswers = []
     for (i=0; i < questions.totalQuestions; i++) {
-        totalAnswers.push(questions.question)
-    } */
+        totalAnswers.push(questions['question' + (i + 1)].correctAnswer)
+    }
+    console.log(totalAnswers)
     
-    totalAnswers = [questions.question1.correctAnswer, questions.question2.correctAnswer, questions.question3.correctAnswer, 
-                    questions.question4.correctAnswer, questions.question5.correctAnswer, questions.question6.correctAnswer]
+    //totalAnswers = [questions.question1.correctAnswer, questions.question2.correctAnswer, questions.question3.correctAnswer, 
+    //                questions.question4.correctAnswer, questions.question5.correctAnswer, questions.question6.correctAnswer]
 
     $(".timeframe").on("click", function() {
         $(".timeframe").removeAttr("disabled")
@@ -108,8 +153,6 @@ $(document).ready(function(){
         timeText.text("Time Remaining: " + timeLeft)
         $("#content").append(timeText)
 
-        $("#content").append(responseText)
-
         onQuestion(questionCount)
         $("#content").append(questionText)
 
@@ -120,6 +163,9 @@ $(document).ready(function(){
             optionText.text(option)
             $("#options").append(optionText)
         }
+
+        $("#content").append(responseText)
+
         console.log("----------------------------------------------------")
         console.log("Initial Question Count: " + questionCount)
         optionClicked()  
@@ -128,6 +174,7 @@ $(document).ready(function(){
     function optionClicked(){
         $(".event").on("click", function(){
             answerCheck($(this).attr("id"))
+
         })
     } 
 
@@ -141,9 +188,9 @@ $(document).ready(function(){
         if (timeLeft === 0) {
             noTimeCount++
             clearInterval(intervalID)
-            questionText.text("Out of time!")
+            responseText.text("Out of time!")
             offClick()
-            setTimeout(clearElements, 4000)
+            setTimeout(clearElements, 3000)
         }
     }
 
@@ -155,7 +202,7 @@ $(document).ready(function(){
                     correctCount++
                     responseText.text("Correct Answer")
                     offClick()
-                    setTimeout(clearElements, 4000)
+                    setTimeout(clearElements, 3000)
                     
                     break
                 }
@@ -164,7 +211,7 @@ $(document).ready(function(){
                     console.log(questionCount)
                     responseText.text("Incorrect Answer. The Correct answer was " + rightanswer(questionCount))
                     offClick()
-                    setTimeout(clearElements, 4000)
+                    setTimeout(clearElements, 3000)
                     break
                 }
             } 
@@ -241,9 +288,13 @@ $(document).ready(function(){
         for (i = 1; i < (questions.totalQuestions) + 1; i++) {
             if (qCount === i) {
                 questionText.text(questions['question' + i].question)
-                possibleAnswers = [questions['question' + i].answers.answerA,questions.question1.answers.answerB,
-                                   questions.question1.answers.answerC,questions.question1.answers.answerD]
+                possibleAnswers = [questions['question' + i].answers.answerA,questions['question' + i].answers.answerB,
+                                   questions['question' + i].answers.answerC,questions['question' + i].answers.answerD]
                 }
+        }
+        for (i = 0; i < possibleAnswers.length; i++) {
+            var option = possibleAnswers[i]
+            $("#" + (i + 1)).text(option)
         }
     }
  
