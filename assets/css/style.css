@@ -1,0 +1,73 @@
+body { 
+    background-image: url("../images/background.jpg"); 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+
+  }
+
+  h1 {
+      color: white;
+  }
+
+
+#content {
+    color: black;
+    font-weight: bold;
+}
+
+
+button {
+    color: whitesmoke;
+    background-color: rgba(139, 0, 0, .6);
+    border-color: whitesmoke
+}
+
+button:hover {
+    background-color: rgba(139, 0, 0, 1);
+}
+
+button:disabled {
+    background-color: indianred
+}
+
+button:disabled:hover {
+    background-color: indianred;
+    color: whitesmoke
+}
+
+#question, #response, #endMessage {
+    font-size: 25px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    color: whitesmoke
+}
+
+#time {
+    font-size: 20px;
+    color: black;
+    font-weight: bold;
+    background-color: rgba(245, 245, 245, .3)
+}
+
+.event:hover {
+    background-color: rgba(139, 0, 0, .3)
+}
+
+.event, #correct, #incorrect, #outOfTime {
+    margin-top: 20px;
+    background-color: rgba(245, 245, 245, .3);
+    font-size: 18px
+}
+
+#endMessage {
+    margin-top: 0px
+}
+
+#questionCounter {
+    color: whitesmoke;
+    font-weight: 600
+}
+
+
