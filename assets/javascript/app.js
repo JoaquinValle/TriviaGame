@@ -149,7 +149,7 @@ $(document).ready(function(){
 
     function answerCheck(clicked) {
         clearInterval(intervalID)
-            for (i = 1; i < 7; i++) {
+            for (i = 1; i < (questions.totalQuestions) + 1; i++) {
             if (questionCount === i) {
                 if (clicked === totalAnswers[i-1]) {
                     correctCount++
