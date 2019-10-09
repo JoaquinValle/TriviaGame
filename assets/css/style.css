@@ -27,7 +27,7 @@ button {
 }
 
 .timeframe:disabled {
-    border-width: 3px
+    border-width: 2px
 }
 
 button:hover {
@@ -39,12 +39,17 @@ button:disabled {
 }
 
 button:disabled:hover {
-    background-color: rgba(220, 20, 60, .6)
+    background-color: rgba(220, 20, 60, .6);
     color: whitesmoke
 }
 
+#start {
+    border-width: 2px
+}
+
 #start:disabled {
-    background-color: rgba(220, 20, 60, .7)
+    background-color: rgba(220, 20, 60, .7);
+    border-width: 1px
 }
 
 #question, #response, #endMessage {
@@ -70,10 +75,12 @@ button:disabled:hover {
 .event, #correct, #incorrect, #outOfTime {
     margin-top: 20px;
     background-color: rgba(245, 245, 245, .3);
-    font-size: 30px
+    font-size: 30px;
 }
 
-
+#correct, #incorrect, #outOfTime {
+    text-shadow: -.5px -.5px 0 whitesmoke, .5px -.5px 0 whitesmoke, -.5px .5px 0 whitesmoke, .5px .5px 0 whitesmoke
+}
 
 #endMessage {
     margin-top: 0px

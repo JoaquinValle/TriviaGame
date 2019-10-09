@@ -67,10 +67,10 @@ $(document).ready(function(){
             question: "How many litters are in a Bordeaux barrel?",
             answers: 
                 {
-                answerA: "A. 100.",
-                answerB: "B. 185.",
-                answerC: "C. 205.",
-                answerD: "D. 225."
+                answerA: "A. 100 liters.",
+                answerB: "B. 185 liters.",
+                answerC: "C. 205 liters.",
+                answerD: "D. 225 liters."
             },
             correctAnswer: "4"
         },
@@ -101,7 +101,7 @@ $(document).ready(function(){
             answers: 
                 {
                 answerA: "A. They produce a bad flavor if they get pressed with the grapes.",
-                answerB: "B. They attack the vine and kill eat",
+                answerB: "B. They attack the vine and kill eat.",
                 answerC: "C. They attract other pests that affect the vines.",
                 answerD: "D. They eat the grapes and the vines produce a lower quality grape."
             },
@@ -265,6 +265,7 @@ $(document).ready(function(){
     }
 
     function results(tCount) {
+        clearInterval(intervalID)
         if (tCount > questions.totalQuestions) {
             $("#content").text("")
             var endMessage = $("<div id='endMessage'></div>")
