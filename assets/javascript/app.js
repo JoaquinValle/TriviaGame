@@ -212,7 +212,7 @@ $(document).ready(function(){
                     correctCount++
                     responseText.text("Correct Answer")
                     offClick()
-                    setTimeout(clearElements, 1000)
+                    setTimeout(clearElements, 3000)
                     
                     break
                 }
@@ -220,7 +220,7 @@ $(document).ready(function(){
                     incorrectCount++
                     responseText.text("Incorrect Answer. The Correct answer was " + rightanswer(questionCount))
                     offClick()
-                    setTimeout(clearElements, 1000)
+                    setTimeout(clearElements, 3000)
                     break
                 }
             } 
