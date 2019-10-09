@@ -109,8 +109,11 @@ div[turnOff]:hover {
     text-shadow: none
 }
 
-
 div[thisOption], div[thisOption]:hover {
     background-color: rgba(139, 0, 0, .4);
     text-shadow: -.5px -.5px 0 whitesmoke, .5px -.5px 0 whitesmoke, -.5px .5px 0 whitesmoke, .5px .5px 0 whitesmoke
+}
+
+#outOfTime {
+    margin-bottom: 30px
 }

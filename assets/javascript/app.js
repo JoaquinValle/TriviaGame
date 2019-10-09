@@ -129,44 +129,50 @@ $(document).ready(function(){
     for (i=0; i < questions.totalQuestions; i++) {
         totalAnswers.push(questions['question' + (i + 1)].correctAnswer)
     }
+
+    timeframe()
+    start()
+
+    function timeframe() {
+        $(".timeframe").on("click", function() {
+            $(".timeframe").removeAttr("disabled")
+            $(this).attr("disabled", true)
+            $("#start").removeAttr("disabled")
+            timeChoose = $(this).attr("value")
+            timeLeft = timeChoose
+            console.log($(this).attr("value") + " seconds chosen.")
+        })
+    }
+
+    function start() {
+        $("#start").on("click", function() {
+
+            $("#content").text("")
+            intervalID = setInterval(count, 1000)
+
+            questionCounter.text("Question " + questionCount + "/" + questions.totalQuestions)
+            $("#content").append(questionCounter)
     
-    $(".timeframe").on("click", function() {
-        $(".timeframe").removeAttr("disabled")
-        $(this).attr("disabled", true)
-        $("#start").removeAttr("disabled")
-        timeChoose = $(this).attr("value")
-        timeLeft = timeChoose
-        console.log($(this).attr("value") + " seconds chosen.")
-    })
+            timeText.text("Time Remaining: " + timeLeft)
+            $("#content").append(timeText)
 
-    $("#start").on("click", function() {
+            onQuestion(questionCount)
+            $("#content").append(questionText)
+            $("#content").append(options)
+            for (i = 0; i < possibleAnswers.length; i++) {
+                var optionText = $("<div class='event' id='" + (i+1) + "'></div>")
+                var option = possibleAnswers[i]
+                optionText.text(option)
+                $("#options").append(optionText)
+            }
 
-        $("#content").text("")
-        intervalID = setInterval(count, 1000)
+            $("#content").append(responseText)
 
-        questionCounter.text("Question " + questionCount + "/" + questions.totalQuestions)
-        $("#content").append(questionCounter)
-   
-        timeText.text("Time Remaining: " + timeLeft)
-        $("#content").append(timeText)
-
-        onQuestion(questionCount)
-        $("#content").append(questionText)
-
-        $("#content").append(options)
-        for (i = 0; i < possibleAnswers.length; i++) {
-            var optionText = $("<div class='event' id='" + (i+1) + "'></div>")
-            var option = possibleAnswers[i]
-            optionText.text(option)
-            $("#options").append(optionText)
-        }
-
-        $("#content").append(responseText)
-
-        console.log("----------------------------------------------------")
-        console.log("Initial Question Count: " + questionCount)
-        optionClicked()  
-    })
+            console.log("----------------------------------------------------")
+            console.log("Initial Question Count: " + questionCount)
+            optionClicked()  
+        })
+    }
 
     function optionClicked(){
         $(".event").on("click", function(){
@@ -208,7 +214,6 @@ $(document).ready(function(){
                 }
                 else if (clicked !== totalAnswers[i-1]) {
                     incorrectCount++
-                    console.log(questionCount)
                     responseText.text("Incorrect Answer. The Correct answer was " + rightanswer(questionCount))
                     offClick()
                     setTimeout(clearElements, 3000)
@@ -265,8 +270,8 @@ $(document).ready(function(){
     }
 
     function results(tCount) {
-        clearInterval(intervalID)
         if (tCount > questions.totalQuestions) {
+            clearInterval(intervalID)
             $("#content").text("")
             var endMessage = $("<div id='endMessage'></div>")
             endMessage.text("All done! Here is how you did:")
@@ -283,6 +288,11 @@ $(document).ready(function(){
             var outOfTime = $("<div id='outOfTime'></div>")
             outOfTime.text("Out of time: " + noTimeCount)
             $("#content").append(outOfTime)
+
+            var reset = $("<button id='reset'>Reset</button>")
+            $("#content").append(reset)
+
+            fullReset()
         }
     }
 
@@ -299,5 +309,52 @@ $(document).ready(function(){
             $("#" + (i + 1)).text(option)
         }
     }
- 
+
+    function fullReset() {
+        $("#reset").on("click", function() {
+            correctCount = 0
+            incorrectCount = 0
+            noTimeCount = 0
+            questionCount = 1
+            $("#content").text("")
+
+                var firstRow = $("<div class='row' id='first-row'></div>")
+                $("#content").append(firstRow)
+
+                    var subRow1 = $("<div class='col-3'></div>")
+                    $("#first-row").append(subRow1)
+
+                    var subRow2 = $("<div class='col-6' id='sub-row-2'></div>")
+                    $("#first-row").append(subRow2)
+
+                        var startBTN = $("<button id='start' type='button' class='btn-block' disabled>Start</button>")
+                        $("#sub-row-2").append(startBTN)
+
+                    var subRow3 = $("<div class='col-3'></div>")
+                    $("#first-col").append(subRow3)
+
+                var secondRow = $("<div class='row mt-5' id='second-row'></div>")
+                $("#content").append(secondRow)
+
+                    var colBTN = $(" <div class='col-12' id='col-btn'></div>")
+                    $("#second-row").append(colBTN)
+
+                        var tenSecs = $("<button class='timeframe' value='10'>10 Seconds</button>")
+                        $("#col-btn").append(tenSecs)
+
+                        var twentySecs = $("<button class='timeframe' value='20'>20 Seconds</button>")
+                        $("#col-btn").append(twentySecs)
+
+                        var thirtySecs = $("<button class='timeframe' value='30'>30 Seconds</button>")
+                        $("#col-btn").append(thirtySecs)
+
+        totalAnswers = []
+        for (i=0; i < questions.totalQuestions; i++) {
+            totalAnswers.push(questions['question' + (i + 1)].correctAnswer)
+        }
+        possibleAnswers = []
+        timeframe()
+        start()
+        })
+    }
 })
