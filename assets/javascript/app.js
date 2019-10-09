@@ -75,7 +75,7 @@ $(document).ready(function(){
             correctAnswer: "4"
         },
         question8: {
-            question: "Sekt is a sparklin wine from which country?",
+            question: "Sekt is a sparkling wine from which country?",
             answers: 
                 {
                 answerA: "A. Italy.",
@@ -124,14 +124,18 @@ $(document).ready(function(){
     var questionCounter = $("<div id='questionCounter'></div>")
     var ABCD = ["A", "B", "C", "D"]
     var thisOption
-
     var totalAnswers = []
-    for (i=0; i < questions.totalQuestions; i++) {
-        totalAnswers.push(questions['question' + (i + 1)].correctAnswer)
-    }
 
+    refreshAnswersArr()
     timeframe()
     start()
+
+    function refreshAnswersArr() {
+        totalAnswers = []
+        for (i=0; i < questions.totalQuestions; i++) {
+            totalAnswers.push(questions['question' + (i + 1)].correctAnswer)
+        }
+    }
 
     function timeframe() {
         $(".timeframe").on("click", function() {
@@ -208,7 +212,7 @@ $(document).ready(function(){
                     correctCount++
                     responseText.text("Correct Answer")
                     offClick()
-                    setTimeout(clearElements, 3000)
+                    setTimeout(clearElements, 1000)
                     
                     break
                 }
@@ -216,7 +220,7 @@ $(document).ready(function(){
                     incorrectCount++
                     responseText.text("Incorrect Answer. The Correct answer was " + rightanswer(questionCount))
                     offClick()
-                    setTimeout(clearElements, 3000)
+                    setTimeout(clearElements, 1000)
                     break
                 }
             } 
@@ -255,11 +259,13 @@ $(document).ready(function(){
         clearInterval(intervalID)
         intervalID = setInterval(count, 1000)
         questionCounter.text("Question " + questionCount + "/" + questions.totalQuestions)
-        for (i = 0; i < possibleAnswers.length; i++) {
-            var optionText = $("<div class='event' id='" + (i+1) + "'></div>")
-            var option = possibleAnswers[i]
-            optionText.text(option)
-            $("#options").append(optionText)
+        if (questionCount < (questions.totalQuestions + 1)) {
+            for (i = 0; i < possibleAnswers.length; i++) {
+                var optionText = $("<div class='event' id='" + (i+1) + "'></div>")
+                var option = possibleAnswers[i]
+                optionText.text(option)
+                $("#options").append(optionText)
+            }
         }
         onQuestion(questionCount)
         optionClicked()
@@ -291,7 +297,6 @@ $(document).ready(function(){
 
             var reset = $("<button id='reset'>Reset</button>")
             $("#content").append(reset)
-
             fullReset()
         }
     }
@@ -308,6 +313,7 @@ $(document).ready(function(){
             var option = possibleAnswers[i]
             $("#" + (i + 1)).text(option)
         }
+
     }
 
     function fullReset() {
@@ -316,6 +322,7 @@ $(document).ready(function(){
             incorrectCount = 0
             noTimeCount = 0
             questionCount = 1
+            possibleAnswers = []
             $("#content").text("")
 
                 var firstRow = $("<div class='row' id='first-row'></div>")
@@ -347,12 +354,7 @@ $(document).ready(function(){
 
                         var thirtySecs = $("<button class='timeframe' value='30'>30 Seconds</button>")
                         $("#col-btn").append(thirtySecs)
-
-        totalAnswers = []
-        for (i=0; i < questions.totalQuestions; i++) {
-            totalAnswers.push(questions['question' + (i + 1)].correctAnswer)
-        }
-        possibleAnswers = []
+        refreshAnswersArr()
         timeframe()
         start()
         })
