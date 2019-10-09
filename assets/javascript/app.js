@@ -123,16 +123,13 @@ $(document).ready(function(){
     var responseText = $("<div id='response'></div>")
     var questionCounter = $("<div id='questionCounter'></div>")
     var ABCD = ["A", "B", "C", "D"]
+    var thisOption
 
     var totalAnswers = []
     for (i=0; i < questions.totalQuestions; i++) {
         totalAnswers.push(questions['question' + (i + 1)].correctAnswer)
     }
-    console.log(totalAnswers)
     
-    //totalAnswers = [questions.question1.correctAnswer, questions.question2.correctAnswer, questions.question3.correctAnswer, 
-    //                questions.question4.correctAnswer, questions.question5.correctAnswer, questions.question6.correctAnswer]
-
     $(".timeframe").on("click", function() {
         $(".timeframe").removeAttr("disabled")
         $(this).attr("disabled", true)
@@ -174,6 +171,9 @@ $(document).ready(function(){
     function optionClicked(){
         $(".event").on("click", function(){
             answerCheck($(this).attr("id"))
+            thisOption = $(this)
+            $(".event").attr("turnOff", " ")
+            $(this).attr("thisOption", " ")
 
         })
     } 
@@ -245,7 +245,8 @@ $(document).ready(function(){
         questionCount++
         timeLeft = timeChoose
         timeText.text("Time Remaining: " + timeLeft)
-
+        $(thisOption).removeAttr("thisOption")
+        $(".event").removeAttr("turnOff")
         clearInterval(intervalID)
         intervalID = setInterval(count, 1000)
         questionCounter.text("Question " + questionCount + "/" + questions.totalQuestions)

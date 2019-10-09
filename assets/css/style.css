@@ -52,7 +52,7 @@ button:disabled:hover {
     margin-top: 20px;
     margin-bottom: 20px;
     color: whitesmoke;
-    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000
+    text-shadow: -.7px -.7px 0 #000, .7px -.7px 0 #000, -.7px .7px 0 #000, .7px .7px 0 #000
 
 }
 
@@ -67,15 +67,13 @@ button:disabled:hover {
     background-color: rgba(245, 245, 245, .3)
 }
 
-.event:hover {
-    background-color: rgba(139, 0, 0, .4);
-}
-
 .event, #correct, #incorrect, #outOfTime {
     margin-top: 20px;
     background-color: rgba(245, 245, 245, .3);
     font-size: 30px
 }
+
+
 
 #endMessage {
     margin-top: 0px
@@ -90,4 +88,22 @@ button:disabled:hover {
 
 .timeframe {
     margin-right: 20px
+}
+
+.event:hover {
+    background-color: rgba(139, 0, 0, .4);
+    text-shadow: -.5px -.5px 0 whitesmoke, .5px -.5px 0 whitesmoke, -.5px .5px 0 whitesmoke, .5px .5px 0 whitesmoke
+}
+
+div[turnOff]:hover {
+    margin-top: 20px;
+    background-color: rgba(245, 245, 245, .3);
+    font-size: 30px;
+    text-shadow: none
+}
+
+
+div[thisOption], div[thisOption]:hover {
+    background-color: rgba(139, 0, 0, .4);
+    text-shadow: -.5px -.5px 0 whitesmoke, .5px -.5px 0 whitesmoke, -.5px .5px 0 whitesmoke, .5px .5px 0 whitesmoke
 }
