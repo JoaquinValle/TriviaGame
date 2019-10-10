@@ -112,14 +112,20 @@ $(document).ready(function(){
     var timeChoose
     var timeLeft
     var intervalID
+    var scoreInterval
     var thisOption
+    var scoreRate
     var questionCount = 1
+    var scoreCount = 0
     var correctCount = 0
     var incorrectCount = 0
     var noTimeCount = 0
+    var initialScore = 0
+    var currentScore
     var totalAnswers = []
     var possibleAnswers = []
     var timeText = $("<div id='time'></div> ")
+    var scoreText = $("<div id='score'></div> ")
     var questionText = $("<div id='question'</div>>")
     var options = $("<div id='options'></div>")
     var responseText = $("<div id='response'></div>")
@@ -144,6 +150,19 @@ $(document).ready(function(){
             $("#start").removeAttr("disabled")
             timeChoose = $(this).attr("value")
             timeLeft = timeChoose
+
+            if ($(this).attr("value") === "10") {
+                initialScore = 2970
+                scoreRate = 30
+            }
+            else if ($(this).attr("value") === "20") {
+                initialScore = 1990
+                scoreRate = 10
+            }  
+            else if ($(this).attr("value") === "30") {
+                initialScore = 897
+                scoreRate = 3 
+            }      
             console.log($(this).attr("value") + " seconds chosen.")
         })
     }
@@ -157,6 +176,11 @@ $(document).ready(function(){
             questionCounter.text("Question " + questionCount + "/" + questions.totalQuestions)
             $("#content").append(questionCounter)
     
+            currentScore = initialScore
+            scoreText.text("Question Score: " + initialScore)
+            scoreInterval = setInterval(scoreRefresh, 100)
+            $("#content").append(scoreText)
+
             timeText.text("Time Remaining: " + timeLeft)
             $("#content").append(timeText)
 
@@ -188,6 +212,11 @@ $(document).ready(function(){
         })
     } 
 
+    function scoreRefresh() {
+        currentScore = currentScore - scoreRate
+        scoreText.text("Question Score: " + currentScore)   
+    }
+
     function count() {
         timeLeft--
         timeText.text("Time Remaining: " + timeLeft)
@@ -198,7 +227,12 @@ $(document).ready(function(){
         if (timeLeft === 0) {
             noTimeCount++
             clearInterval(intervalID)
+            responseText.attr("no-time", " ")
+            scoreCount = scoreCount + currentScore
+            console.log("Score Count: " + scoreCount)
+            clearInterval(scoreInterval)
             responseText.text("Out of time!")
+
             offClick()
             setTimeout(clearElements, 3000)
         }
@@ -206,10 +240,14 @@ $(document).ready(function(){
 
     function answerCheck(clicked) {
         clearInterval(intervalID)
+        clearInterval(scoreInterval)
             for (i = 1; i < (questions.totalQuestions) + 1; i++) {
             if (questionCount === i) {
                 if (clicked === totalAnswers[i-1]) {
                     correctCount++
+                    scoreCount = scoreCount + currentScore
+                    console.log("Score Count: " + scoreCount)
+                    responseText.attr("correct", " ")
                     responseText.text("Correct Answer")
                     offClick()
                     setTimeout(clearElements, 3000)
@@ -218,6 +256,11 @@ $(document).ready(function(){
                 }
                 else if (clicked !== totalAnswers[i-1]) {
                     incorrectCount++
+                    currentScore = 0
+                    scoreCount = scoreCount + currentScore
+                    scoreText.text("Question Score: " + currentScore)
+                    console.log("Score Count: " + scoreCount)
+                    responseText.attr("incorrect", " ")
                     responseText.text("Incorrect Answer. The Correct answer was " + rightanswer(questionCount))
                     offClick()
                     setTimeout(clearElements, 3000)
@@ -251,13 +294,20 @@ $(document).ready(function(){
     function clearElements() {
         $("#options").text("")
         $("#response").text("")
+        responseText.removeAttr("correct")
+        responseText.removeAttr("incorrect")
+        responseText.removeAttr("no-Time")
         questionCount++
         timeLeft = timeChoose
         timeText.text("Time Remaining: " + timeLeft)
+        currentScore = initialScore
+        scoreText.text("Question Score: " + initialScore)
         $(thisOption).removeAttr("thisOption")
         $(".event").removeAttr("turnOff")
         clearInterval(intervalID)
         intervalID = setInterval(count, 1000)
+        clearInterval(scoreInterval)
+        scoreInterval = setInterval(scoreRefresh, 100)
         questionCounter.text("Question " + questionCount + "/" + questions.totalQuestions)
         if (questionCount < (questions.totalQuestions + 1)) {
             for (i = 0; i < possibleAnswers.length; i++) {
@@ -277,8 +327,9 @@ $(document).ready(function(){
 
     function results(tCount) {
         if (tCount > questions.totalQuestions) {
-            clearInterval(intervalID)
             $("#content").text("")
+            clearInterval(intervalID)
+            clearInterval(scoreInterval)
             var endMessage = $("<div id='endMessage'></div>")
             endMessage.text("All done! Here is how you did:")
             $("#content").append(endMessage)
@@ -294,6 +345,10 @@ $(document).ready(function(){
             var outOfTime = $("<div id='outOfTime'></div>")
             outOfTime.text("Out of time: " + noTimeCount)
             $("#content").append(outOfTime)
+
+            var scoreTotal = $("<div id='score-total'></div>")
+            scoreTotal.text("Total Score: " + scoreCount)
+            $("#content").append(scoreTotal)
 
             var reset = $("<button id='reset'>Reset</button>")
             $("#content").append(reset)
@@ -322,6 +377,7 @@ $(document).ready(function(){
             incorrectCount = 0
             noTimeCount = 0
             questionCount = 1
+            scoreCount = 0
             possibleAnswers = []
             $("#content").text("")
 

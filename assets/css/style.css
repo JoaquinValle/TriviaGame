@@ -56,12 +56,27 @@ button:disabled:hover {
     margin-top: 20px;
     margin-bottom: 20px;
     color: whitesmoke;
-    text-shadow: -.7px -.7px 0 #000, .7px -.7px 0 #000, -.7px .7px 0 #000, .7px .7px 0 #000
+    text-shadow: -1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black, 1px 1px 0 black
 
 }
 
+#response[correct] {
+    color: darkgreen;
+    text-shadow: -1px -1px 0 whitesmoke, 1px -1px 0 whitesmoke, -1px 1px 0 whitesmoke, 1px 1px 0 whitesmoke
+}
+
+#response[incorrect] {
+    color: darkred;
+    text-shadow: -1px -1px 0 whitesmoke, 1px -1px 0 whitesmoke, -1px 1px 0 whitesmoke, 1px 1px 0 whitesmoke
+}
+
+#response[no-Time] {
+    color: darkblue;
+    text-shadow: -1px -1px 0 whitesmoke, 1px -1px 0 whitesmoke, -1px 1px 0 whitesmoke, 1px 1px 0 whitesmoke
+}
+
 #question {
-    font-size: 22px
+    font-size: 28px
 }
 
 #time {
@@ -71,13 +86,13 @@ button:disabled:hover {
     background-color: rgba(245, 245, 245, .3)
 }
 
-.event, #correct, #incorrect, #outOfTime {
+.event, #correct, #incorrect, #outOfTime, #score-total {
     margin-top: 20px;
     background-color: rgba(245, 245, 245, .3);
     font-size: 30px;
 }
 
-#correct, #incorrect, #outOfTime {
+#correct, #incorrect, #outOfTime, #score-total {
     text-shadow: -.5px -.5px 0 whitesmoke, .5px -.5px 0 whitesmoke, -.5px .5px 0 whitesmoke, .5px .5px 0 whitesmoke
 }
 
@@ -86,9 +101,15 @@ button:disabled:hover {
 }
 
 #questionCounter {
-    color: whitesmoke;
+    color: black;
     font-weight: 600;
     font-size: 20px;
+    text-shadow: -1px -1px 0 whitesmoke, 1px -1px 0 whitesmoke, -1px 1px 0 whitesmoke, 1px 1px 0 whitesmoke
+}
+
+#score {
+    color: whitesmoke;
+    font-weight: 600;
     text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000
 }
 
@@ -113,6 +134,6 @@ div[thisOption], div[thisOption]:hover {
     text-shadow: -.5px -.5px 0 whitesmoke, .5px -.5px 0 whitesmoke, -.5px .5px 0 whitesmoke, .5px .5px 0 whitesmoke
 }
 
-#outOfTime {
+#score-total {
     margin-bottom: 30px
 }
