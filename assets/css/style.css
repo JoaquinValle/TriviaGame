@@ -7,17 +7,16 @@ body {
     font-family: 'Grenze', serif;
   }
 
-  h1 {
-      color: whitesmoke;
-      font-size: 80px;
-      text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000
-  }
+    h1 {
+        color: whitesmoke;
+        font-size: 80px;
+        text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000
+    }
 
 #content {
     color: black;
     font-weight: bold;
 }
-
 
 button {
     color: whitesmoke;

@@ -101,7 +101,7 @@ $(document).ready(function(){
             answers: 
                 {
                 answerA: "A. They produce a bad flavor if they get pressed with the grapes.",
-                answerB: "B. They attack the vine and kill eat.",
+                answerB: "B. They attack the vine and kill it..",
                 answerC: "C. They attract other pests that affect the vines.",
                 answerD: "D. They eat the grapes and the vines produce a lower quality grape."
             },
@@ -112,19 +112,19 @@ $(document).ready(function(){
     var timeChoose
     var timeLeft
     var intervalID
+    var thisOption
     var questionCount = 1
+    var correctCount = 0
+    var incorrectCount = 0
+    var noTimeCount = 0
+    var totalAnswers = []
     var possibleAnswers = []
     var timeText = $("<div id='time'></div> ")
     var questionText = $("<div id='question'</div>>")
     var options = $("<div id='options'></div>")
-    var correctCount = 0
-    var incorrectCount = 0
-    var noTimeCount = 0
     var responseText = $("<div id='response'></div>")
     var questionCounter = $("<div id='questionCounter'></div>")
     var ABCD = ["A", "B", "C", "D"]
-    var thisOption
-    var totalAnswers = []
 
     refreshAnswersArr()
     timeframe()
